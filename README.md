@@ -1,11 +1,11 @@
-# HyperionSAT Flight-Computer – Hardware (2025)
+# HyperionSAT Flight‑Computer – 하드웨어 (2025)
 
-> **Rev**: 1.0 · **ECAD**: KiCad 9.0.4 · **MCU**: STM32H723VGT6 (550 MHz, DP‑FPU)  
-> **Role**: Hybrid flight computer for 2nd‑stage burn, TVC control, sensing, and comms
+> **Rev**: 1.0 · **ECAD**: KiCad 9.0.4 · **MCU**: STM32H723VGT6 (550 MHz, DP‑FPU)  
+> **역할**: 2차 추진, TVC 제어, 센싱, 통신을 담당하는 하이브리드 비행 컴퓨터
 
 ---
 
-## Repository Layout (snapshot)
+## 리포지토리 구성 (스냅샷)
 ```
 docs/
 └─ images/
@@ -17,25 +17,24 @@ docs/
    └─ sch_additional.png
 README.md
 ```
-> Add PCB photos (Top/Bottom) later under `docs/images/` when available.
+> PCB 사진(Top/Bottom)은 준비되면 `docs/images/`에 추가하세요.
 
 ---
 
-## 1) System Overview
+## 1) 시스템 개요
 
-**Blocks**
+**블록**
 - **Processor**: STM32H723VGT6, 12 MHz TCXO, SWD, EEPROM(AT24C08C), RTC(DS3231M), Buzzer/LED, microSD(SDMMC 4‑bit).
-- **Flight Sensors**: ICM‑45686(SPI), ICM‑20948(SPI, 1.8 V IO), MS5611(SPI), MMC5983MA(SPI), MAX‑M10S(UART+PPS), VL53L1X(I²C), **CDS‑Top/Bottom**(Bottom=TLV9001 buffer).
-- **Actuators**: TVC Servo X/Y(12 V), **Linear Solenoid**(IRF1404, adapter release), **Parachute Electromagnet**(DRV8871DDA).
-- **Communications**: LoRa E32‑433T37S(UART + M0/M1/AUX), **Globalstar STX‑3**(UART + EN/RESET), RF matching network.
-- **PMIC/Power**: Main Li‑Po 3S (Cell1/2 buffered ADC), **Ignition battery** (pack‑voltage ADC), 3.3 V switching, **INA219** for discharge/ignition current, **AS6221** board temps.
-- **Capacitors**: 100 µF parts are **polymer tantalum** capacitors (high ripple/low ESR points).
+- **Flight Sensors**: ICM‑45686(SPI), ICM‑20948(SPI, 1.8 V IO), MS5611(SPI), MMC5983MA(SPI), MAX‑M10S(UART+PPS), VL53L1X(I²C), **CDS‑Top/Bottom**(Bottom=TLV9001 버퍼).
+- **Actuators**: TVC 서보 X/Y(12 V), **리니어 솔레노이드**(IRF1404, 어댑터 분리), **낙하산 전개 전자석**(DRV8871DDA).
+- **Communications**: LoRa E32‑433T37S(UART + M0/M1/AUX), **Globalstar STX‑3**(UART + EN/RESET), RF 매칭 네트워크.
+- **PMIC/Power**: 메인 Li‑Po 3S(셀1/2 버퍼드 ADC), **점화 배터리**(팩 전압 ADC), 3.3 V 스위칭, **INA219** 방전/점화 전류 측정, **AS6221** 온도.
 
-**Ignition**: **Single‑channel** configuration (simplified from earlier multi‑channel plan).
+**점화(IGN)**: **1채널** 구성으로 단순화됨.
 
 ---
 
-## 2) Electrical Interfaces (net labels)
+## 2) 전기적 인터페이스 (네트 라벨 기준)
 
 ### SPI
 | Bus | Device | Signals |
@@ -48,11 +47,11 @@ README.md
 | Bus | Device | Addr |
 |---|---|---|
 | RTC | DS3231M | 0x68 |
-| EEPROM | AT24C08C | 0x50 *(datasheet 8‑bit code 0xA0)* |
-| TEMP | AS6221 (Board/PMIC/FET/LoRa) | 0x48 / 0x49 / 0x4B / 0x4A |
+| EEPROM | AT24C08C | 0x50 *(데이터시트 8‑bit 코드 0xA0)* |
+| TEMP | AS6221(Board/PMIC/FET/LoRa) | 0x48 / 0x49 / 0x4B / 0x4A |
 | IGN | INA219 | 0x41 |
 
-### UART / Timing / GPIO
+### UART / 타이밍 / GPIO
 | Link | Signals |
 |---|---|
 | Debug | `Debug_Tx`, `Debug_Rx` |
@@ -65,7 +64,7 @@ README.md
 
 ---
 
-## 3) Schematic Snapshots
+## 3) 회로도 스냅샷
 
 - **Processor**  
   <img src="docs/images/sch_processor.png" width="900"/>
@@ -82,32 +81,30 @@ README.md
 - **Actuators**  
   <img src="docs/images/sch_actuators.png" width="900"/>
 
-- **Additional parts (Magnetometer SPI, CDS Bottom buffer, LoRa temp)**  
+- **Additional parts (Magnetometer SPI, CDS Bottom 버퍼, LoRa 온도)**  
   <img src="docs/images/sch_additional.png" width="900"/>
 
 ---
 
-## 4) Bring‑Up Checklist
+## 4) 브링업 체크리스트
 
-1. Visual: polarity/orientation/bridges; **polymer tantalum 100 µF** locations verified.  
-2. PSU: 12 V CC ramp 0.2→0.8 A, 3.3 V ripple < 50 mVp‑p.  
-3. I²C scans per bus (RTC/EEPROM/TEMP/IGN).  
-4. RTC `SQW/INT` interrupt; EEPROM 64 B R/W.  
-5. SPI sensors WHOAMI order: ICM‑45686 → ICM‑20948 → MS5611 → MMC5983MA.  
-6. GPS NMEA & 1 PPS.  
-7. SDMMC 4‑bit, long writes (≥64 KB) w/ 22 Ω series near MCU.  
-8. Actuators: Servo PWM range, Solenoid transient, DRV8871 `ILIM=32 kΩ`.  
-9. **Ignition 1‑ch**: TC427 → dummy load; confirm **INA219** current log.  
-10. LoRa/STX‑3: EN/RESET sequence, UART link; later RF tuning (STX‑3 π‑match).
-
----
-
-## 5) Notes
-
-- TXB0106 auto‑direction level shifting can be marginal for SPI; consider fixed‑direction translators for robustness if issues arise.  
-- RF: STX‑3 π‑network values are initial; retune with VNA after final antenna/cable selection.  
-- ADC: Cell buffers require gain/offset calibration; store in EEPROM alongside PID gains.
+1. 육안 검사: 극성/방향/브리지 확인, **폴리머 탄탈 100 µF** 위치 점검.  
+2. 전원: 12 V CC 0.2→0.8 A 램프, 3.3 V 리플 < 50 mVp‑p.  
+3. I²C 버스별 스캔(RTC/EEPROM/TEMP/IGN).  
+4. RTC `SQW/INT` 인터럽트, EEPROM 64 B R/W.  
+5. SPI WHOAMI: ICM‑45686 → ICM‑20948 → MS5611 → MMC5983MA.  
+6. GPS NMEA 및 1 PPS 확인.  
+7. SDMMC 4‑bit 연속 쓰기(≥64 KB), MCU 근처 22 Ω 시리즈 검증.  
+8. 액추에이터: 서보 PWM 범위/전류, 솔레노이드 트랜지언트, DRV8871 `ILIM=32 kΩ`.  
+9. **점화 1채널**: TC427 → 더미로드, **INA219** 전류 로깅.  
+10. LoRa/STX‑3: EN/RESET 순서, UART 링크; STX‑3 π‑매칭은 후속 VNA 튜닝.
 
 ---
 
-_Last updated: 2025-08-24_
+## 5) 비고
+
+- TXB0106 자동 방향 레벨시프터는 SPI에 한계가 있을 수 있음. 필요 시 고정 방향 트랜슬레이터로 변경 검토.  
+- RF: STX‑3 π‑네트워크 값은 초기값. 최종 안테나/케이블로 VNA 재튜닝 권장.  
+- ADC: 셀 버퍼 출력은 게인/오프셋 보정 필요. PID 이득과 함께 EEPROM에 저장 권장.
+
+---
