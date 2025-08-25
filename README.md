@@ -108,3 +108,5 @@ README.md
 - ADC: 셀 버퍼 출력은 게인/오프셋 보정 필요. PID 이득과 함께 EEPROM에 저장 권장.
 
 ---
+
+> **Firmware repo**: [https://github.com/ORG/REPO-FW  ](https://github.com/jmh8231-Dev/hyperionsat-fw-2025)
