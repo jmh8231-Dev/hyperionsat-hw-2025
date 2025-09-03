@@ -17,7 +17,6 @@ docs/
    └─ sch_additional.png
 README.md
 ```
-> PCB 사진(Top/Bottom)은 준비되면 `docs/images/`에 추가하세요.
 
 ---
 
