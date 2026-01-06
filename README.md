@@ -31,6 +31,20 @@ README.md
 
 **점화(IGN)**: **1채널** 구성으로 단순화됨.
 
+<h3>Block Diagrams</h3>
+<table>
+  <tr>
+    <td><a href="docs/images/block-diagram-obc.jpg"><img src="docs/images/block-diagram-obc.jpg" alt="OBC" width="100%"></a></td>
+    <td><a href="docs/images/block-diagram-comm.jpg"><img src="docs/images/block-diagram-comm.jpg" alt="Communication" width="100%"></a></td>
+    <td><a href="docs/images/block-diagram-power.jpg"><img src="docs/images/block-diagram-power.jpg" alt="Power" width="100%"></a></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>OBC</sub></td>
+    <td align="center"><sub>Communication</sub></td>
+    <td align="center"><sub>Power</sub></td>
+  </tr>
+</table>
+
 ---
 
 ## 2) 전기적 인터페이스 (네트 라벨 기준)
