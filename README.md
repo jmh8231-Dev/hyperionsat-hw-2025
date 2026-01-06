@@ -34,9 +34,9 @@ README.md
 <h3>Block Diagrams</h3>
 <table>
   <tr>
-    <td><a href="docs/images/block-diagram-obc.jpg"><img src="docs/images/block-diagram-obc.jpg" alt="OBC" width="100%"></a></td>
-    <td><a href="docs/images/block-diagram-comm.jpg"><img src="docs/images/block-diagram-comm.jpg" alt="Communication" width="100%"></a></td>
-    <td><a href="docs/images/block-diagram-power.jpg"><img src="docs/images/block-diagram-power.jpg" alt="Power" width="100%"></a></td>
+    <td><a href="docs/images/block-diagram-obc.png"><img src="docs/images/block-diagram-obc.png" alt="OBC" width="100%"></a></td>
+    <td><a href="docs/images/block-diagram-comm.png"><img src="docs/images/block-diagram-comm.png" alt="Communication" width="100%"></a></td>
+    <td><a href="docs/images/block-diagram-power.png"><img src="docs/images/block-diagram-power.png" alt="Power" width="100%"></a></td>
   </tr>
   <tr>
     <td align="center"><sub>OBC</sub></td>
