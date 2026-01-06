@@ -83,29 +83,5 @@ README.md
 - **Additional parts (Magnetometer SPI, CDS Bottom 버퍼, LoRa 온도)**  
   <img src="docs/images/sch_additional.png" width="900"/>
 
----
-
-## 4) 브링업 체크리스트
-
-1. 육안 검사: 극성/방향/브리지 확인, **폴리머 탄탈 100 µF** 위치 점검.  
-2. 전원: 12 V CC 0.2→0.8 A 램프, 3.3 V 리플 < 50 mVp‑p.  
-3. I²C 버스별 스캔(RTC/EEPROM/TEMP/IGN).  
-4. RTC `SQW/INT` 인터럽트, EEPROM 64 B R/W.  
-5. SPI WHOAMI: ICM‑45686 → ICM‑20948 → MS5611 → MMC5983MA.  
-6. GPS NMEA 및 1 PPS 확인.  
-7. SDMMC 4‑bit 연속 쓰기(≥64 KB), MCU 근처 22 Ω 시리즈 검증.  
-8. 액추에이터: 서보 PWM 범위/전류, 솔레노이드 트랜지언트, DRV8871 `ILIM=32 kΩ`.  
-9. **점화 1채널**: TC427 → 더미로드, **INA219** 전류 로깅.  
-10. LoRa/STX‑3: EN/RESET 순서, UART 링크; STX‑3 π‑매칭은 후속 VNA 튜닝.
-
----
-
-## 5) 비고
-
-- TXB0106 자동 방향 레벨시프터는 SPI에 한계가 있을 수 있음. 필요 시 고정 방향 트랜슬레이터로 변경 검토.  
-- RF: STX‑3 π‑네트워크 값은 초기값. 최종 안테나/케이블로 VNA 재튜닝 권장.  
-- ADC: 셀 버퍼 출력은 게인/오프셋 보정 필요. PID 이득과 함께 EEPROM에 저장 권장.
-
----
 
 > **Firmware repo**: [https://github.com/ORG/REPO-FW  ](https://github.com/jmh8231-Dev/hyperionsat-fw-2025)
