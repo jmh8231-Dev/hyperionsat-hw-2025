@@ -15,6 +15,15 @@
     <td align="center"><sub>Top</sub></td>
     <td align="center"><sub>Bottom</sub></td>
   </tr>
+
+  <tr>
+    <td><a href="docs/images/add_3d_top.png"><img src="docs/images/add_3d_top.png" alt="SUB Top" width="100%"></a></td>
+    <td><a href="docs/images/add_3d_bottom.png"><img src="docs/images/add_3d_bottom.png" alt="SUB Bottom" width="100%"></a></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>SUB Top</sub></td>
+    <td align="center"><sub>SUB Bottom</sub></td>
+  </tr>
 </table>
 
 ---
