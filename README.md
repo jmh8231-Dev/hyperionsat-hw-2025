@@ -5,6 +5,20 @@
 
 ---
 
+<h3>3D Rendering</h3>
+<table>
+  <tr>
+    <td><a href="docs/images/3d_top.png"><img src="docs/images/3d_top.png" alt="Top" width="100%"></a></td>
+    <td><a href="docs/images/3d_bottom.png"><img src="docs/images/3d_bottom.png" alt="Bottom" width="100%"></a></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>Top</sub></td>
+    <td align="center"><sub>Bottom</sub></td>
+  </tr>
+</table>
+
+---
+
 ## 리포지토리 구성 (스냅샷)
 ```
 docs/
